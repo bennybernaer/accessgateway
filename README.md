@@ -8,6 +8,16 @@ When an ancestor category is configured as a gateway and the user cannot see
 that category (`f_list`), local permissions below that category are treated as
 denied. Child forum permissions stored in the database are not modified.
 
+## Download
+
+Download the latest stable release from:
+
+https://github.com/bennybernaer/accessgateway/releases/tag/v1.0.0
+
+The ready-to-install package is:
+
+`bennybernaer_accessgateway_1.0.0.zip`
+
 ## Requirements
 
 - phpBB 3.3.16 or newer
