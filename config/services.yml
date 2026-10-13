@@ -1,0 +1,17 @@
+services:
+    auth:
+        class: bennybernaer\accessgateway\auth\auth
+        arguments:
+            - '@dbal.conn'
+            - '%core.table_prefix%'
+
+    bennybernaer.accessgateway.listener:
+        class: bennybernaer\accessgateway\event\listener
+        arguments:
+            - '@dbal.conn'
+            - '@request'
+            - '@template'
+            - '@user'
+            - '%core.table_prefix%'
+        tags:
+            - { name: event.listener }
