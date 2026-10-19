@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   release:
-    if: github.event.head_commit.message == 'Prepare v1.0.0 release'
+    if: github.event.head_commit.message == 'Prepare v1.0.1 release'
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
@@ -26,15 +26,15 @@ jobs:
             --exclude='dist' \
             ./ build/bennybernaer/accessgateway/
           cd build
-          zip -r ../bennybernaer_accessgateway_1.0.0.zip bennybernaer
+          zip -r ../bennybernaer_accessgateway_1.0.1.zip bennybernaer
 
       - name: Create GitHub release
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release create v1.0.0 \
-            bennybernaer_accessgateway_1.0.0.zip \
+          gh release create v1.0.1 \
+            bennybernaer_accessgateway_1.0.1.zip \
             --repo "${{ github.repository }}" \
             --target "${{ github.sha }}" \
-            --title "Access Gateway 1.0.0" \
-            --notes-file RELEASE_NOTES_1.0.0.md
+            --title "Access Gateway 1.0.1" \
+            --notes-file RELEASE_NOTES_1.0.1.md
