@@ -1,4 +1,4 @@
-# Access Gateway 1.0.0
+# Access Gateway 1.0.1
 
 Author: **bennybernaer**
 
@@ -12,11 +12,11 @@ denied. Child forum permissions stored in the database are not modified.
 
 Download the latest stable release from:
 
-https://github.com/bennybernaer/accessgateway/releases/tag/v1.0.0
+https://github.com/bennybernaer/accessgateway/releases/tag/v1.0.1
 
 The ready-to-install package is:
 
-`bennybernaer_accessgateway_1.0.0.zip`
+`bennybernaer_accessgateway_1.0.1.zip`
 
 ## Requirements
 
@@ -41,15 +41,30 @@ Then enable **Access Gateway** under:
 
     ACP > Customise > Manage extensions
 
-Edit a category under:
+## Configuration
+
+The gateway setting belongs to the category's forum settings. To change it, go to:
 
     ACP > Forums > Manage forums
 
-and set **Act as access gateway** to Yes.
+Then click the **green gear icon** for the category you want to edit and set
+**Act as access gateway** to Yes or No.
+
+Clicking the category name itself opens that category; it does not open the
+settings page where the gateway option is shown.
+
+Normal user/group forum permissions remain in phpBB's permissions section. For
+example, group access can be changed under:
+
+    ACP > Permissions > Group forum permissions
+
+This separation is normal: the extension adds a setting to the category itself,
+while phpBB continues to manage user and group permissions in its existing
+permissions screens.
 
 ## Behaviour
 
-- Gateway = No: normal phpBB behaviour.
+- Gateway = No (default): normal phpBB behaviour. Hiding/denying the category itself does not automatically deny access to its child forums; their own permissions still apply.
 - Gateway = Yes and user can see the category: child ACLs work normally.
 - Gateway = Yes and user cannot see the category: local access below it is denied.
 - Stored child ACLs are never copied, overwritten or changed.
@@ -60,10 +75,15 @@ and set **Act as access gateway** to Yes.
 This extension replaces phpBB's `auth` service with a subclass of
 `\phpbb\auth\auth` so the check happens centrally without modifying core files.
 
-Version 1.0.0 also filters `acl_get_list()` results through the gateway and
+The extension also filters `acl_get_list()` results through the gateway and
 stores effective gateway denials in the ACL cache so `acl_getf()` and
 `acl_getf_global()` cannot bypass the gateway by reading a previously cached
 raw result.
 
 As with any extension replacing a core service, test compatibility with other
 extensions that also replace the `auth` service.
+
+## Version 1.0.1
+
+Version 1.0.1 is a documentation and language clarification release based on
+real-world testing. It does not change the gateway permission logic.
